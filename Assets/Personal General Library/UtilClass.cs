@@ -134,6 +134,18 @@ public static class UtilClass
 
     }
 
+    public static float GetAngleBetweenVector2(Vector2 vec1, Vector2 vec2)
+    {
+        Vector2 diference = vec2 - vec1;
+        float sign = (vec2.y < vec1.y) ? -1.0f : 1.0f;
+        return Vector2.Angle(Vector2.right, diference) * sign;
+    }
+
+    public static Vector2 GetVector2FromAngle(float angle)
+    {
+        return new Vector2((float)Mathf.Cos(angle * Mathf.Deg2Rad), (float)Mathf.Sin(angle * Mathf.Deg2Rad));
+    }
+
 
 
     //covert object <-> byte[]

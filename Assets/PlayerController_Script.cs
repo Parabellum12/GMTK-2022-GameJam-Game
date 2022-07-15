@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController_Script : MonoBehaviour
 {
+    [SerializeField] CombatDamageHandler combatHandler;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +17,9 @@ public class PlayerController_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            combatHandler.Attack();
+        }
     }
 }

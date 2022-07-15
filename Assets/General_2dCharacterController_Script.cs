@@ -43,8 +43,11 @@ public class General_2dCharacterController_Script : MonoBehaviour
         handleMove(xmove, ymove);
     }
 
+
     void handleMove(float xmove, float ymove)
     {
+
+
         if (xmove != 0)
         {
             currentXSpeed += xmove * Acceleration * Time.deltaTime;
@@ -59,8 +62,13 @@ public class General_2dCharacterController_Script : MonoBehaviour
             {
                 currentXSpeed += Deceleration * Time.deltaTime;
             }
+
         }
         currentXSpeed = Mathf.Clamp(currentXSpeed, -TopSpeed, TopSpeed);
+        if (Mathf.Abs(currentXSpeed) < .05)
+        {
+            currentXSpeed = 0;
+        }
 
         if (ymove != 0)
         {
@@ -78,6 +86,11 @@ public class General_2dCharacterController_Script : MonoBehaviour
             }
         }
         currentYSpeed = Mathf.Clamp(currentYSpeed, -TopSpeed, TopSpeed);
+        if (Mathf.Abs(currentYSpeed) < .05)
+        {
+            currentYSpeed = 0;
+        }
+
 
         float xSpeedToMoveBy = currentXSpeed;
         float ySpeedToMoveBy = currentYSpeed;
@@ -86,11 +99,13 @@ public class General_2dCharacterController_Script : MonoBehaviour
             xSpeedToMoveBy = currentXSpeed / 1.4f;
             ySpeedToMoveBy = currentYSpeed / 1.4f;
         }
+        
+        CharacterRigidBody.velocity = new Vector2(xSpeedToMoveBy, ySpeedToMoveBy);
+        //Vector3 test = new Vector3(transform.position.x + xSpeedToMoveBy * Time.deltaTime, transform.position.y + ySpeedToMoveBy * Time.deltaTime, -1f);
+        //transform.position =  test;
 
-
-        Vector3 test = new Vector3(transform.position.x + xSpeedToMoveBy * Time.deltaTime, transform.position.y + ySpeedToMoveBy * Time.deltaTime, -1f);
-        transform.position =  test;
     }
 
 
 }
+
